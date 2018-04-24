@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html" encoding="ISO-8859-1" > 
+        <h:head>
+            <title>
+                <ui:insert name="tituloJanela"/>
+            </title>
+            <h:outputStylesheet library="css" name="estilos.css"/>
+            <h:outputScript library="js" name="jquery.maskMoney.js"/>
+        </h:head>
+        <h:body>
+            <p:ajaxStatus onsuccess="configurarMoeda()">
+                
+            </p:ajaxStatus>
+            <p:growl id="growl" life="3000"/>
+            <div id="cabecalho">
+                <ui:include src="/templates/cabecalho.xhtml"/>
+            </div>
+            <div id="barraMenu">
+                <ui:include src="/templates/menu.xhtml"/>
+            </div>
+            <div id="conteudo">
+                <ui:insert name="conteudo"/>
+            </div>
+            <div id="rodape">
+                <ui:include src="/templates/rodape.xhtml"/>
+            </div>
+            <script>
+                function configurarMoeda(){
+                    $(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true});
+                }
+                $(document).ready(function(){
+                   configurarMoeda(); 
+                });
+            </script>
+        </h:body>
+        </f:view>
+</html>
+

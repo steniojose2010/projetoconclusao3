@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Menu Pessoas</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListPessoas">
+                <p:dataTable value="#{pessoaMB.pessoas}" var="pessoa" emptyMessage="Nenhuma Pessoa Cadastrada"
+                             paginator="true" rows="10" paginatorPosition="bottom" id="tablePessoas" >
+                    <f:facet name="header">Pessoas</f:facet>
+                    <p:column headerText="Código" width="30">
+                        #{pessoa.idPessoa}
+                    </p:column>
+                    <p:column headerText="Nome" width="200">
+                        #{pessoa.nome}
+                    </p:column> 
+                    <p:column headerText="Endereço" width="180">
+                        #{pessoa.endereco}
+                    </p:column>
+                    <p:column headerText="Email" width="170">
+                        <h:outputText value="#{pessoa.email}">                          
+                        </h:outputText>
+                    </p:column>                   
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="#{pessoaMB.alteracao(pessoa)}" update="@form"/>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{pessoaMB.excluir(pessoa)}" update="@form" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Adicionar" icon="ui-icon-plusthick" action="#{pessoaMB.novo()}" update="@form" />  
+                        <p:commandButton value="Adicionar 1000" icon="ui-icon-plusthick" action="#{pessoaMB.novo1000()}" update="@form" />
+                    </f:facet>
+                </p:dataTable>              
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
